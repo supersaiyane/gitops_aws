@@ -12,7 +12,23 @@
   * initialize_remote_state
   * vpc_bastion
   * eks
-  * LB_Cloudwatch 
+  * LB_Cloudwatch
+
+ ## Execution Sequence
+ * Terraform/initialize_remote_state
+ * Terraform/vpc_bastion
+ * Terraform/eks
+ * Terraform/LB_Cloudwatch
+ * Observability.txt
+ * Argocd-K8s-installation.txt
+ * Create CodeCommit Repo
+   * For K8s manifest
+     * notification.yml
+     * ingress.yml
+   * For Code
+     * notification service
+ * CodeBuild for Notification service
+   * Create BuildSpec.yml  
 
 ## Architecture 
 ![GitOps Architecture](https://github.com/supersaiyane/gitops_aws/blob/main/Architecture_gitops%20with%20argocd%20and%20aws.webp)
