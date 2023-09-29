@@ -63,9 +63,9 @@ resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
   }
 
   tags = {
-    Project     = "pfv3stage"
-    Owner       = "Vertisystem PVT. LTD"
-    Description = "Dynamodb for pfv3stage terraform state"
+    Project     = "v3stage"
+    Owner       = "xx PVT. LTD"
+    Description = "Dynamodb for v3stage terraform state"
   }
 }
 
@@ -82,9 +82,9 @@ resource "aws_dynamodb_table" "stage-ekscluster" {
   }
 
   tags = {
-    Project     = "pfv3stage"
-    Owner       = "Vertisystem PVT. LTD"
-    Description = "Dynamodb for pfv3stage terraform state"
+    Project     = "v3stage"
+    Owner       = "xx PVT. LTD"
+    Description = "Dynamodb for v3stage terraform state"
   }
 }
 
@@ -100,8 +100,8 @@ resource "aws_dynamodb_table" "stage-eks-cloudwatch-lb" {
   }
 
   tags = {
-    Project     = "pfv3stage"
-    Owner       = "Vertisystem PVT. LTD"
-    Description = "Dynamodb for pfv3stage terraform state"
+    Project     = "v3stage"
+    Owner       = "xxx PVT. LTD"
+    Description = "Dynamodb for v3stage terraform state"
   }
 }
