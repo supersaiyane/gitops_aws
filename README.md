@@ -10,8 +10,18 @@
 * ArgoCD
 
 ## Architecture 
-![] (https://raw.githubusercontent.com/supersaiyane/gitops_aws/main/Architecture_gitops%20with%20argocd%20and%20aws.webp?raw=true)
+![GitOps Architecture](https://github.com/supersaiyane/gitops_aws/blob/main/Architecture_gitops%20with%20argocd%20and%20aws.webp)
 
+### Workflow of the Architecture
+* First, our Terraform code will create the complete infrastructure, which includes VPC, Subnets, Security Groups (SG), Route Tables, Internet Gateway, NAT Gateway, Kubernetes, ALB Controller, required policies for K8s to function, and CloudWatch logs for K8s.
+* Install ArgoCD and retrieve the password.
+* Create a repository for code and service deployments in CodeCommit.
+* Build the project using CodeBuild and create a Buildspec file to generate a Docker image and update the YAML version of the deployments.
+* Create a CodePipeline for pipeline automation.
+* Authenticate the CodeCommit Ops repository with ArgoCD.
+* Create a project for the service in ArgoCD.
+* Once a user commits code to the branch, CodePipeline will trigger. It will create a new Docker image, push it to ECR, and then update the deployment YAML files with the latest Docker image version.
+* As soon as the image version is updated, ArgoCD will detect the change and deploy the latest version of the service in Kubernetes (K8s).
 
 ## Complete Article Series 
 
