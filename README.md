@@ -49,5 +49,5 @@
 * [Simplifying Kubernetes Operations with Terraform, ArgoCD and GitOps on AWS: Part 1](https://medium.com/@gurpreet.singh_89/simplifying-kubernetes-operations-with-argocd-and-gitops-part-1-f015354feba5)
 * [Simplifying Kubernetes Operations with Terraform, ArgoCD and GitOps on AWS: Part 2](https://medium.com/@gurpreet.singh_89/simplifying-kubernetes-operations-with-argocd-and-gitops-on-aws-part-2-a994e8d1292d)
 * [Simplifying Kubernetes Operations with Terraform, ArgoCD and GitOps on AWS: Part 3](https://medium.com/@gurpreet.singh_89/simplifying-kubernetes-operations-with-terraform-argocd-and-gitops-on-aws-part-3-6d4fb71484d3)
-* [Simplifying Kubernetes Operations with Terraform, ArgoCD and GitOps on AWS: Part 4]
+* [Simplifying Kubernetes Operations with Terraform, ArgoCD and GitOps on AWS: Part 4](https://medium.com/@gurpreet.singh_89/simplifying-kubernetes-operations-with-terraform-argocd-and-gitops-on-aws-part-4-f7dcbbd42389)
   
