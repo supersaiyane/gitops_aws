@@ -1,0 +1,16 @@
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install prometheus prometheus-community/kube-prometheus-stack
+kubectl get ns
+kubectl get po
+kubectl get svc
+kubectl edit svc prometheus-grafana -change service type ClusterIP to NodePort
+kubectl get svc
+mkdir ingress
+cd ingress/
+ls
+vim grafana-ingress.yaml
+kubectl get ing
+vim grafana-ingress.yaml
+kubectl create -f grafana-ingress.yaml 
+kubectl get ing
