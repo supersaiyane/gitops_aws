@@ -8,6 +8,11 @@
   * EKS
   * ECR
 * ArgoCD
+* Terraform
+  * initialize_remote_state
+  * vpc_bastion
+  * eks
+  * LB_Cloudwatch 
 
 ## Architecture 
 ![GitOps Architecture](https://github.com/supersaiyane/gitops_aws/blob/main/Architecture_gitops%20with%20argocd%20and%20aws.webp)
