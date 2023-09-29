@@ -14,26 +14,10 @@
   * eks
   * LB_Cloudwatch
 
- ## Execution Sequence
- * Terraform/initialize_remote_state
- * Terraform/vpc_bastion
- * Terraform/eks
- * Terraform/LB_Cloudwatch
- * Observability.txt
- * Argocd-K8s-installation.txt
- * Create CodeCommit Repo
-   * For K8s manifest
-     * notification.yml
-     * ingress.yml
-   * For Code
-     * notification service
- * CodeBuild for Notification service
-   * Create BuildSpec.yml  
-
 ## Architecture 
 ![GitOps Architecture](https://github.com/supersaiyane/gitops_aws/blob/main/Architecture_gitops%20with%20argocd%20and%20aws.webp)
 
-### Workflow of the Architecture
+### Workflow to achieve the above Architecture
 * First, our Terraform code will create the complete infrastructure, which includes VPC, Subnets, Security Groups (SG), Route Tables, Internet Gateway, NAT Gateway, Kubernetes, ALB Controller, required policies for K8s to function, and CloudWatch logs for K8s.
 * Install ArgoCD and retrieve the password.
 * Create a repository for code and service deployments in CodeCommit.
@@ -43,6 +27,22 @@
 * Create a project for the service in ArgoCD.
 * Once a user commits code to the branch, CodePipeline will trigger. It will create a new Docker image, push it to ECR, and then update the deployment YAML files with the latest Docker image version.
 * As soon as the image version is updated, ArgoCD will detect the change and deploy the latest version of the service in Kubernetes (K8s).
+  
+### Execution Sequence
+* Terraform/initialize_remote_state
+* Terraform/vpc_bastion
+* Terraform/eks
+* Terraform/LB_Cloudwatch
+* Observability.txt
+* Argocd-K8s-installation.txt
+* Create CodeCommit Repo
+  * For K8s manifest
+    * notification.yml
+    * ingress.yml
+  * For Code
+    * notification service
+* CodeBuild for Notification service
+  * Create BuildSpec.yml 
 
 ## Complete Article Series 
 
