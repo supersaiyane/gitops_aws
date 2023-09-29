@@ -9,6 +9,10 @@
   * ECR
 * ArgoCD
 
+## Architecture 
+![] (https://raw.githubusercontent.com/supersaiyane/gitops_aws/main/Architecture_gitops%20with%20argocd%20and%20aws.webp?raw=true)
+
+
 ## Complete Article Series 
 
 * [Simplifying Kubernetes Operations with Terraform, ArgoCD and GitOps on AWS: Part 1](https://medium.com/@gurpreet.singh_89/simplifying-kubernetes-operations-with-argocd-and-gitops-part-1-f015354feba5)
