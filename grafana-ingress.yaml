@@ -1,1 +1,23 @@
-dd
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: default
+  name: grafana-ingress
+  annotations:
+    kubernetes.io/ingress.class: "alb"
+    alb.ingress.kubernetes.io/certificate-arn: <arn>
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: <SubnetId,SubnetId>
+    alb.ingress.kubernetes.io/target-type: instance
+spec:
+  rules:
+    - host: example.io
+      http:
+        paths:
+        - backend:
+            service:
+              name: grafana-svc
+              port:
+                number: 3000
+          path: /
+          pathType: Prefix
