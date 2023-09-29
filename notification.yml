@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification
+  namespace: default
+  labels:
+    app: notification
+  annotations:
+     configmap.reloader.stakater.com/reload: "notification"
+spec:
+  selector:
+    matchLabels:
+      app: notification
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: notification
+    spec:
+      containers:
+        - name: notification
+          image: <account_ID>.dkr.ecr.us-east-2.amazonaws.com/notification:12
+          imagePullPolicy: Always        
+          ports:
+            - containerPort: 8000
+          envFrom:  
+            - configMapRef:
+                name: notification
+          env:
+            - name: APP_TYPE
+              value: service                
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: notification
+  namespace: default
+data:
+  KEY: VALUE
+  KEY: VALUE
+  KEY: VALUE
+  KEY: VALUE
+  KEY: VALUE
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: default
+  labels:
+    app: notification
+  name: notification-svc
+spec:
+  ports:
+  - port: 8008
+    targetPort: 8000
+  selector:
+    app: notification
+  type: NodePort
