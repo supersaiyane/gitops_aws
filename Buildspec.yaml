@@ -1,0 +1,44 @@
+version: 0.2
+phases:
+
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI=<Account-ID>.dkr.ecr.us-east-2.amazonaws.com/notification-service-stage
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=$CODEBUILD_BUILD_NUMBER
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:$IMAGE_TAG .
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - git config --global user.email "user@mail.com"
+      - git config --global user.name "user"
+      - git config --global credential.helper '!aws codecommit credential-helper $@'
+      - git config --global credential.UseHttpPath true
+      - mkdir test
+      - cd test
+      - git clone https://git-codecommit.us-east-2.amazonaws.com/v1/repos/ops
+      - cd ops
+      - git checkout CICD
+      - cd notification
+      - old_image_string="$(grep -P \^\.\*550677539815.dkr.ecr.us-east-2.amazonaws.com/notification-service-stage\.\*\$ notification/notification.yaml)"
+      - old_image_tag=${old_image_string##*:}
+      - echo $old_image_tag
+      - sed -i 's/notification-service-stage:'$old_image_tag'/notification-service-stage:'$IMAGE_TAG'/g' notification/notification.yaml
+      - git add notification/notification.yaml
+      - git commit -m "Update image version in Kubernetes YAML file"
+      - git push origin CICD
+      - echo Writing image definitions file...
+      - printf '[{"name":"today-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - cat imagedefinitions.json 
+artifacts:
+    files:
+      - '**/*'
